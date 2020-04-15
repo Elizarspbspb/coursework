@@ -17,8 +17,34 @@ using namespace std;
 int main()
 {
 	int one = 0;
-	cout << "Enter the number of disks: ";
-	cin >> one;
+	while ((one != 3) && (one != 4) && (one != 5) && (one != 6))
+	{
+		try
+		{
+			cout << "Enter the number of disks: ";
+			cin >> one;
+			if (cin.fail())
+			{
+				cin.clear();
+				while (cin.get() != '\n');
+				throw 1;
+			}
+			if (one > 6 || one < 3)
+			{
+				cin.clear();
+				while (cin.get() != '\n');
+				throw 2;
+			}
+		}
+		catch (int i)
+		{
+			cout << "Error # " << i << endl;
+			cout << "1 - Incorrect input" << endl;
+			cout << "2 - Disks can be from 3 to 6 " << endl;
+			cin.clear();
+			system("pause");
+		}
+	}
 	Ring ring(one);
 	one = 0;
 	int from = 0; // с какой башни
@@ -108,9 +134,9 @@ int main()
 			else
 				throw 1;
 		}
-		catch (int i) 
-		{ 
-			cout << "Error # " << i << endl; 
+		catch (int i)
+		{
+			cout << "Error # " << i << endl;
 			cout << "1 - Error, non-existent pyramid" << endl;
 			cout << "2 - Error, Incorrect input FROM " << endl;
 			cout << "3 - Error, Incorrect input TO " << endl;
