@@ -1,6 +1,6 @@
 ﻿#include "Ring.h"
 
-#include "graphics.h"
+#include "graphics.h" // подключаем графическую бибилотеку
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>                     // Provides exit
@@ -19,20 +19,19 @@ void Ring::draw(int x, int y) // Функция помещает курсор т
 void Ring::showRing(Element elem, int x, int y)
 {
 	draw(x+1, y); // устанавливаем курсор
-	setColor(WHITE, elem.color);  // установка цета
-	for (int i = 0; i < elem.size; i++) // вывод size символов
+	setColor(WHITE, elem.get_color());  // установка цета
+	for (int i = 0; i < elem.get_size(); i++) // вывод size символов
 	{
 		draw(x+i, y); // устанавливаем курсор
 		cout << (char)219; // выбор формы прямоугольника
 	}
-	//draw(x + 10, y+10); // устанавливаем курсор
 	setColor(WHITE, BLACK); // вернуть старый цвет
 }
 
 void Ring::setColor(int background, int text) // функция установки цвета
 {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
+	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text)); // библиотечная функция
 }
 
 Ring::Ring() // конструктор по умаолчанию
@@ -47,8 +46,24 @@ Ring::Ring() // конструктор по умаолчанию
 	vector <Element> tower2;
 
 	Element element; // экземпляр структуры
-	element.size = 10; // заполнил поле размер
-	element.color = 0; // выбрал цвет
+	element.set_size(10);
+	element.set_color(0);
+}
+
+Ring::~Ring() // деструктор
+{
+	towers.clear();
+	cout << "Destructor"<<endl;
+}
+
+Ring::Ring(const Ring & obj) // конструктор копии
+{
+	Element *temp;                 //создаем указатель на структуру  
+	vector <vector <Element>> Towers = obj.towers; // копирование 2-мер. вектора
+	int N = N;
+	int x = x;
+	int y = y;
+	int sx = sx;
 }
 
 Ring::Ring(int pn)
@@ -62,8 +77,8 @@ Ring::Ring(int pn)
 	vector <Element> tower2;
 
 	Element element; // экземпляр структуры
-	element.size = 15;  // заполнил поле размер
-	element.color = 0;  // выбрал цвет
+	element.set_size(15);  // заполнил поле размер
+	element.set_color(0);  // выбрал цвет
 
 	tower0.push_back(element);  // поместил в вектор экземпляр структы (копию)
 	tower1.push_back(element);  // 3 башни
@@ -71,10 +86,9 @@ Ring::Ring(int pn)
 
 	for (int i = N; i >= 1; i--)  // заполняем башню
 	{
-		//draw(i, i); // устанавливаем курсор 
-		element.size = i+2;
-		element.color = i + 1;
-		tower0.push_back(element);
+		element.set_size(i+2); // указать размер
+		element.set_color(i+1); // указать цвет
+		tower0.push_back(element); // добавление диска
 	}
 
 	towers.push_back(tower0);  // поместил в многомерный вектор одномерные вектора
@@ -102,20 +116,20 @@ void Ring::showTowers()  // вывод всех башен
 	}
 }
 
-bool Ring::shiftDisk(int from, int to, int step)
+bool Ring::shiftDisk(int from, int to, int step) // доб. удал. дисков
 {
 	Element element0;
 	Element element1;
 
 	from--;
 	to--;
-	element0 = towers[from][towers[from].size() - 1];
-	element1 = towers[to][towers[to].size() - 1];
+	element0 = towers[from][towers[from].size() - 1]; // находим размер вектора
+	element1 = towers[to][towers[to].size() - 1]; // размер вектора
 
-	if (element0.size < element1.size) // сравниваю размеры 
+	if (element0.get_size() < element1.get_size()) // сравниваю размеры 
 	{
-		towers[from].pop_back();
-		towers[to].push_back(element0);
+		towers[from].pop_back(); // удалить последний элемент
+		towers[to].push_back(element0); // добавить в конец (сверху) диск
 		return true;
 	}
 	else
