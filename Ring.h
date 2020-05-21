@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <vector>
 #include <windows.h>
 #include <ctime>
@@ -8,20 +8,20 @@ using namespace std;
 class Ring
 {
 private:
-	int N; // количесвто колец
-	vector <vector <Element>> towers;  // двумерный вектор
-	int x;  // определяет нижнюю координату начала
-	int y; // определяет координату по у курсора
-	int sx; // смещение между башнями
+	int N; // РєРѕР»РёС‡РµСЃРІС‚Рѕ РєРѕР»РµС†
+	vector <vector <Element>> towers;  // РґРІСѓРјРµСЂРЅС‹Р№ РІРµРєС‚РѕСЂ
+	int x;  // РѕРїСЂРµРґРµР»СЏРµС‚ РЅРёР¶РЅСЋСЋ РєРѕРѕСЂРґРёРЅР°С‚Сѓ РЅР°С‡Р°Р»Р°
+	int y; // РѕРїСЂРµРґРµР»СЏРµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ РїРѕ Сѓ РєСѓСЂСЃРѕСЂР°
+	int sx; // СЃРјРµС‰РµРЅРёРµ РјРµР¶РґСѓ Р±Р°С€РЅСЏРјРё
 public:
-	void draw(int x, int y); // установка курсора по координатам
-	void showRing(Element elem, int x, int y); // вывод дисков
-	void setColor(int background, int text); // BACKGROUNd - цвет фона, TEXT - цвет символа
-	Ring(); // конструктор по умолчанию
-	Ring(int pn); // конструктор с параметром
-	~Ring(); // деструктор
-	Ring(const Ring &obj);    // Конструктор копии 
-	void showTowers();  // вывод башен
-	bool shiftDisk(int sour, int dest, int step); // удаление и добавление элементов в вектор
-	bool win();  // функция ПОБЕДЫ
+	void draw(int x, int y); // СѓСЃС‚Р°РЅРѕРІРєР° РєСѓСЂСЃРѕСЂР° РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Р°Рј
+	void showRing(Element elem, int x, int y); // РІС‹РІРѕРґ РґРёСЃРєРѕРІ
+	void setColor(int background, int text); // BACKGROUNd - С†РІРµС‚ С„РѕРЅР°, TEXT - С†РІРµС‚ СЃРёРјРІРѕР»Р°
+	Ring(); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+	Ring(int pn); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂРѕРј
+	~Ring(); // РґРµСЃС‚СЂСѓРєС‚РѕСЂ
+	Ring(const Ring &obj);    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёРё 
+	void showTowers();  // РІС‹РІРѕРґ Р±Р°С€РµРЅ
+	bool shiftDisk(int sour, int dest, int step); // СѓРґР°Р»РµРЅРёРµ Рё РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РІ РІРµРєС‚РѕСЂ
+	bool win();  // С„СѓРЅРєС†РёСЏ РџРћР‘Р•Р”Р«
 };

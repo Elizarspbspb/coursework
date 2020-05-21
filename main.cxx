@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <math.h>
 #include <stdlib.h>                     
 #include <ctype.h>                     
@@ -43,22 +43,22 @@ int main()
 	}
 	Ring ring(one);
 	one = 0;
-	int from = 0; // с какой башни
-	int to = 0; // на какую 
-	int c = 0;  // счетчик шагов
+	int from = 0; // СЃ РєР°РєРѕР№ Р±Р°С€РЅРё
+	int to = 0; // РЅР° РєР°РєСѓСЋ 
+	int c = 0;  // СЃС‡РµС‚С‡РёРє С€Р°РіРѕРІ
 	int i = 0;
 	while (true)
 	{
 		system("cls");
-		ring.draw(0, 2); // перекидывает курсор
+		ring.draw(0, 2); // РїРµСЂРµРєРёРґС‹РІР°РµС‚ РєСѓСЂСЃРѕСЂ
 		cout << "if you want to exit tap 9 in the FROM field and tap 9 in the TO field" << endl;
 		cout << "'Steps' = " << c << endl;
 		i++;
-		ring.showTowers();  // прорисовка башен
-		ring.draw(0, 5); // перекидывает курсор запроса ввода вывода
+		ring.showTowers();  // РїСЂРѕСЂРёСЃРѕРІРєР° Р±Р°С€РµРЅ
+		ring.draw(0, 5); // РїРµСЂРµРєРёРґС‹РІР°РµС‚ РєСѓСЂСЃРѕСЂ Р·Р°РїСЂРѕСЃР° РІРІРѕРґР° РІС‹РІРѕРґР°
 		try
 		{
-			cout << "From: "; // откуда переносим
+			cout << "From: "; // РѕС‚РєСѓРґР° РїРµСЂРµРЅРѕСЃРёРј
 			cin >> from;
 			if (cin.fail())
 			{
@@ -67,7 +67,7 @@ int main()
 				throw 2;
 			}
 
-			cout << "To: "; // куда переносим
+			cout << "To: "; // РєСѓРґР° РїРµСЂРµРЅРѕСЃРёРј
 			cin >> to;
 			if (cin.fail())
 			{
@@ -78,13 +78,13 @@ int main()
 			if ((from == 1 || from == 2 || from == 3) && (to == 1 || to == 2 || to == 3))
 			{
 				c++;
-				if (!ring.shiftDisk(from, to, c)) // если не удалось переместить диск
+				if (!ring.shiftDisk(from, to, c)) // РµСЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РїРµСЂРµРјРµСЃС‚РёС‚СЊ РґРёСЃРє
 				{
 					cout << "/ ERROR \ - wrong size " << endl;
 					c--;
 					system("pause");
 				}
-				if (ring.win()) // проверка на победу
+				if (ring.win()) // РїСЂРѕРІРµСЂРєР° РЅР° РїРѕР±РµРґСѓ
 				{
 					system("cls");
 					try
@@ -96,25 +96,25 @@ int main()
 						switch (error)
 						{
 						case ERROR_400:
-							cout << endl << "\n Башни не найдены." << endl;
+							cout << endl << "\n Р‘Р°С€РЅРё РЅРµ РЅР°Р№РґРµРЅС‹." << endl;
 							break;
 						default:
-							cout << endl << "\n Неизвестная ошибка." << endl;
+							cout << endl << "\n РќРµРёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°." << endl;
 						}
 					}
 					try
 					{
-						ring.draw(55, 12); // перекидывает курсор
+						ring.draw(55, 12); // РїРµСЂРµРєРёРґС‹РІР°РµС‚ РєСѓСЂСЃРѕСЂ
 					}
-					catch (int error) // если вдруг не удалось отрисовать
+					catch (int error) // РµСЃР»Рё РІРґСЂСѓРі РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚СЂРёСЃРѕРІР°С‚СЊ
 					{
 						switch (error)
 						{
 						case ERROR_400:
-							cout << endl << "\n Передвинуть курсоср невозможно." << endl;
+							cout << endl << "\n РџРµСЂРµРґРІРёРЅСѓС‚СЊ РєСѓСЂСЃРѕСЃСЂ РЅРµРІРѕР·РјРѕР¶РЅРѕ." << endl;
 							break;
 						default:
-							cout << endl << "\n Неизвестная ошибка." << endl;
+							cout << endl << "\n РќРµРёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°." << endl;
 						}
 					}
 					cout << "! WIN !" << endl;
@@ -122,7 +122,7 @@ int main()
 					break;
 				}
 			}
-			else if (from == 9 || to == 9) // выход из игры
+			else if (from == 9 || to == 9) // РІС‹С…РѕРґ РёР· РёРіСЂС‹
 				break;
 			else
 				throw 1;

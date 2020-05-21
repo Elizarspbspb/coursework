@@ -1,17 +1,17 @@
-#pragma once
+п»ї#pragma once
 
 using namespace std;
-class Element  // структура кольца
+class Element  // СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕР»СЊС†Р°
 {
-private:  // закрытые переменные
-	int size; // размер диска
-	int color; // цвет диска
+private:  // Р·Р°РєСЂС‹С‚С‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
+	int size; // СЂР°Р·РјРµСЂ РґРёСЃРєР°
+	int color; // С†РІРµС‚ РґРёСЃРєР°
 public:
-	Element();  // конструктор
-	~Element();  // деструктор
-	Element(int pn); // конструктор с параметром
-	int get_size(); // функция для возврата значения из private
+	Element();  // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	~Element();  // РґРµСЃС‚СЂСѓРєС‚РѕСЂ
+	Element(int pn); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂРѕРј
+	int get_size(); // С„СѓРЅРєС†РёСЏ РґР»СЏ РІРѕР·РІСЂР°С‚Р° Р·РЅР°С‡РµРЅРёСЏ РёР· private
 	int get_color();
-	void set_size(int k);  // функция установки значения из private
+	void set_size(int k);  // С„СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё Р·РЅР°С‡РµРЅРёСЏ РёР· private
 	void set_color(int k);
 };
