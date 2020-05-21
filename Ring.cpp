@@ -1,6 +1,6 @@
-п»ї#include "Ring.h"
+#include "Ring.h"
 
-#include "graphics.h" // РїРѕРґРєР»СЋС‡Р°РµРј РіСЂР°С„РёС‡РµСЃРєСѓСЋ Р±РёР±РёР»РѕС‚РµРєСѓ
+#include "graphics.h" // подключаем графическую бибилотеку
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>                     // Provides exit
@@ -10,33 +10,33 @@
 #include <windows.h>
 using namespace std;
 
-void Ring::draw(int x, int y) // Р¤СѓРЅРєС†РёСЏ РїРѕРјРµС‰Р°РµС‚ РєСѓСЂСЃРѕСЂ С‚РµРєСЃС‚РѕРІРѕРіРѕ СЌРєСЂР°РЅР° РІ С‚РѕС‡РєСѓ СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё С…,Сѓ
+void Ring::draw(int x, int y) // Функция помещает курсор текстового экрана в точку с координатами х,у
 {
-	COORD p = { x, y }; // СЃС‚СЂСѓРєС‚СѓСЂР°
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p); // С„СѓРЅРєС†РёСЏ Р±РёР±Р»РёРѕС‚РµРєРё windows.h
+	COORD p = { x, y }; // структура
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p); // функция библиотеки windows.h
 }
 
-void Ring::showRing(Element elem, int x, int y)
+void Ring::showRing(Element elem, int x, int y) //
 {
-	draw(x+1, y); // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєСѓСЂСЃРѕСЂ
-	setColor(WHITE, elem.get_color());  // СѓСЃС‚Р°РЅРѕРІРєР° С†РµС‚Р°
-	for (int i = 0; i < elem.get_size(); i++) // РІС‹РІРѕРґ size СЃРёРјРІРѕР»РѕРІ
+	draw(x + 1, y); // устанавливаем курсор
+	setColor(WHITE, elem.get_color());  // установка цета
+	for (int i = 0; i < elem.get_size(); i++) // вывод size символов
 	{
-		draw(x+i, y); // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєСѓСЂСЃРѕСЂ
-		cout << (char)219; // РІС‹Р±РѕСЂ С„РѕСЂРјС‹ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°
+		draw(x + i, y); // устанавливаем курсор
+		cout << (char)219; // выбор формы дисков
 	}
-	setColor(WHITE, BLACK); // РІРµСЂРЅСѓС‚СЊ СЃС‚Р°СЂС‹Р№ С†РІРµС‚
+	setColor(WHITE, BLACK); // вернуть старый цвет
 }
 
-void Ring::setColor(int background, int text) // С„СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё С†РІРµС‚Р°
+void Ring::setColor(int background, int text) // функция установки цвета
 {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text)); // Р±РёР±Р»РёРѕС‚РµС‡РЅР°СЏ С„СѓРЅРєС†РёСЏ
+	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text)); // библиотечная функция
 }
 
-Ring::Ring() // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјР°РѕР»С‡Р°РЅРёСЋ
+Ring::Ring() // конструктор по умаолчанию
 {
-	N = 3;   // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»РµР№
+	N = 3;   // инициализация полей
 	x = 15;
 	y = 20;
 	sx = 25;
@@ -45,21 +45,21 @@ Ring::Ring() // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјР°РѕР»С‡Р°РЅРёСЋ
 	vector <Element> tower1;
 	vector <Element> tower2;
 
-	Element element; // СЌРєР·РµРјРїР»СЏСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹
+	Element element; // объект класса
 	element.set_size(10);
-	element.set_color(0);
+	element.set_color(1);
 }
 
-Ring::~Ring() // РґРµСЃС‚СЂСѓРєС‚РѕСЂ
+Ring::~Ring() // деструктор
 {
 	towers.clear();
-	cout << "Destructor"<<endl;
+	cout << "Destructor" << endl;
 }
 
-Ring::Ring(const Ring & obj) // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёРё
+Ring::Ring(const Ring & obj) // конструктор копии
 {
-	Element *temp;                 //СЃРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ  
-	vector <vector <Element>> Towers = obj.towers; // РєРѕРїРёСЂРѕРІР°РЅРёРµ 2-РјРµСЂ. РІРµРєС‚РѕСЂР°
+	Element *temp;                 //создаем указатель на структуру  
+	vector <vector <Element>> Towers = obj.towers; // копирование 2-мер. вектора
 	int N = N;
 	int x = x;
 	int y = y;
@@ -68,7 +68,7 @@ Ring::Ring(const Ring & obj) // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёРё
 
 Ring::Ring(int pn)
 {
-	N = pn;   // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»РµР№
+	N = pn;   // инициализация полей
 	x = 15;
 	y = 20;
 	sx = 25;
@@ -76,69 +76,67 @@ Ring::Ring(int pn)
 	vector <Element> tower1;
 	vector <Element> tower2;
 
-	Element element; // СЌРєР·РµРјРїР»СЏСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹
-	element.set_size(15);  // Р·Р°РїРѕР»РЅРёР» РїРѕР»Рµ СЂР°Р·РјРµСЂ
-	element.set_color(0);  // РІС‹Р±СЂР°Р» С†РІРµС‚
+	Element element;  // 1 объект класса
+	element.set_size(15);  // заполнил поле размер
+	element.set_color(1);  // выбрал цвет
 
-	tower0.push_back(element);  // РїРѕРјРµСЃС‚РёР» РІ РІРµРєС‚РѕСЂ СЌРєР·РµРјРїР»СЏСЂ СЃС‚СЂСѓРєС‚С‹ (РєРѕРїРёСЋ)
-	tower1.push_back(element);  // 3 Р±Р°С€РЅРё
-	tower2.push_back(element);
-
-	for (int i = N; i >= 1; i--)  // Р·Р°РїРѕР»РЅСЏРµРј Р±Р°С€РЅСЋ
+	tower0.push_back(element);  // поместил в вектор объект класса (копию)
+	tower1.push_back(element);  // 3 башни
+	tower2.push_back(element);  // запись диска основания
+	// помещается копия объекта следовательно можно менять параметры
+	for (int i = N; i >= 1; i--)  // заполняем башню
 	{
-		element.set_size(i+2); // СѓРєР°Р·Р°С‚СЊ СЂР°Р·РјРµСЂ
-		element.set_color(i+1); // СѓРєР°Р·Р°С‚СЊ С†РІРµС‚
-		tower0.push_back(element); // РґРѕР±Р°РІР»РµРЅРёРµ РґРёСЃРєР°
+		element.set_size(i + 2); // указать размер
+		element.set_color(i + 1); // указать цвет
+		tower0.push_back(element); // добавление диска
 	}
 
-	towers.push_back(tower0);  // РїРѕРјРµСЃС‚РёР» РІ РјРЅРѕРіРѕРјРµСЂРЅС‹Р№ РІРµРєС‚РѕСЂ РѕРґРЅРѕРјРµСЂРЅС‹Рµ РІРµРєС‚РѕСЂР°
+	towers.push_back(tower0);  // поместил в многомерный вектор одномерные вектора
 	towers.push_back(tower1);
 	towers.push_back(tower2);
 }
 
-void Ring::showTowers()  // РІС‹РІРѕРґ РІСЃРµС… Р±Р°С€РµРЅ
+void Ring::showTowers()  // вывод всех башен
 {
 	int lx = x;
-	int ly = y;  // Р»РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
-	draw(lx, ly); // СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєСѓСЂСЃРѕСЂ РЅР°С‡Р°Р»Р° РѕС‚СЂРёСЃРѕРІРєРё
-	for (int i = 0; i < towers.size(); i++) // С†РёРєР» РїРѕ РІСЃРµРј РІРµРєС‚РѕСЂР°Рј - РєРѕР»РёС‡РµСЃРІС‚Рѕ РѕРґРЅРѕРјРµСЂРЅС‹С… РІРµРєС‚РѕСЂРѕРІ РІ РјРѕРµРј РІРµРєС‚РѕСЂРµ
+	int ly = y;  // локальные переменные
+	draw(lx, ly); // установить курсор начала отрисовки
+	for (int i = 0; i < towers.size(); i++) // цикл по всем векторам - количесвто одномерных векторов в моем векторе
 	{
-		draw(lx+i, ly+i); // СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєСѓСЂСЃРѕСЂ РЅР°С‡Р°Р»Р° РѕС‚СЂРёСЃРѕРІРєРё
-		for (int j = 0; j < towers[i].size(); j++)  // РІРЅСѓС‚СЂРё РєР°Р¶РґРѕРіРѕ РІРµРєС‚РѕСЂР° = РєРѕР»-РІРѕ РґРёСЃРєРѕРІ РІ РІРµРєС‚РѕСЂРµ
+		draw(lx + i, ly + i); // установить курсор начала отрисовки
+		for (int j = 0; j < towers[i].size(); j++)  // внутри каждого вектора = кол-во дисков в векторе
 		{
-			draw(lx, ly); // СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєСѓСЂСЃРѕСЂ РЅР°С‡Р°Р»Р° РѕС‚СЂРёСЃРѕРІРєРё
-			showRing(towers[i][j], lx, ly); // РІС‹РІРѕРґ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅС‹С… Р±Р°С€РµРЅ РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С…
+			draw(lx, ly); // установить курсор начала отрисовки
+			showRing(towers[i][j], lx, ly); // вывод прямоугольных башен в координатах
 			ly--;
-			//lx = lx + 1;
 		}
 		ly = y;
-		lx += sx;  // РѕС‚СЂРёСЃРѕР°РІС‚СЊ СЃР»РµРґСѓСЋС‰СѓСЋ Р±Р°С€РЅСЋ Р»РµРІРµРµ
+		lx += sx;  // отрисоавть следующую башню левее
 	}
 }
 
-bool Ring::shiftDisk(int from, int to, int step) // РґРѕР±. СѓРґР°Р». РґРёСЃРєРѕРІ
+bool Ring::shiftDisk(int from, int to, int step) // доб. удал. дисков
 {
-	Element element0;
+	Element element0; // создаются 2 объекта, которые принимают значения верхних дисков
 	Element element1;
-
 	from--;
 	to--;
-	element0 = towers[from][towers[from].size() - 1]; // РЅР°С…РѕРґРёРј СЂР°Р·РјРµСЂ РІРµРєС‚РѕСЂР°
-	element1 = towers[to][towers[to].size() - 1]; // СЂР°Р·РјРµСЂ РІРµРєС‚РѕСЂР°
+	element0 = towers[from][towers[from].size() - 1]; // находим размер вектора
+	element1 = towers[to][towers[to].size() - 1]; // размер вектора
 
-	if (element0.get_size() < element1.get_size()) // СЃСЂР°РІРЅРёРІР°СЋ СЂР°Р·РјРµСЂС‹ 
+	if (element0.get_size() < element1.get_size()) // сравниваю размеры 
 	{
-		towers[from].pop_back(); // СѓРґР°Р»РёС‚СЊ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
-		towers[to].push_back(element0); // РґРѕР±Р°РІРёС‚СЊ РІ РєРѕРЅРµС† (СЃРІРµСЂС…Сѓ) РґРёСЃРє
+		towers[from].pop_back(); // удалить последний элемент
+		towers[to].push_back(element0); // добавить в конец (сверху) диск
 		return true;
 	}
 	else
 		return false;
 }
 
-bool Ring::win()  // С„СѓРЅРєС†РёСЏ РїРѕР±РµРґС‹
+bool Ring::win()  // функция победы
 {
-	if (towers[1].size() == N + 1 || towers[2].size() == N + 1) // РµСЃР»Рё Р±Р°С€РЅСЏ СЃРѕР±СЂР°Р»Р°СЃСЊ РЅР° 2 РёР»Рё 3 СЃС‚РµСЂР¶РЅРµ С‚Рѕ РїРѕР±РµРґР°
+	if (towers[1].size() == N + 1 || towers[2].size() == N + 1) // если башня собралась на 2 или 3 стержне то победа
 		return true;
 	else
 		return false;
